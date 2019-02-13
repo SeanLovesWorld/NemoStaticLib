@@ -1,0 +1,4 @@
+# make file generated files
+.dep.inc
+build/
+dist/
