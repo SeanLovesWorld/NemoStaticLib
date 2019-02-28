@@ -38,7 +38,7 @@ using std::vector;
 
 
 class Subgraph {
-   friend ostream& operator<< (ostream&, const Subgraph&);
+    friend ostream& operator<< (ostream&, const Subgraph&);
 public:
     Subgraph(int); /// the order of this subgraphs
     virtual ~Subgraph();
@@ -51,11 +51,11 @@ public:
     int get(int); //get the nth node of this subgraph
     vector<vertex>& getNodes();
     bool isComplete();
-    
+
 private:
     vector<vertex> nodes; // get the list of vertex lists
     int order; // the intended size
- };
+};
 
 #endif /* SUBGRAPH_H */
 
