@@ -2,5 +2,4 @@
 .dep.inc
 build/
 dist/
-.idea/
 cmake-build-debug/
