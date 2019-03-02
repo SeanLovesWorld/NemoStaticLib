@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df930885-a1a5-4c0f-8657-724bce50c277" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="df930885-a1a5-4c0f-8657-724bce50c277" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,11 +99,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="389" />
-    <option name="y" value="-7" />
-    <option name="width" value="1546" />
-    <option name="height" value="1185" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="207" />
+    <option name="y" value="135" />
+    <option name="width" value="2023" />
+    <option name="height" value="1109" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -169,12 +167,12 @@
       <workItem from="1550797054248" duration="323000" />
       <workItem from="1551073502651" duration="493000" />
       <workItem from="1551081277306" duration="7001000" />
-      <workItem from="1551394322078" duration="1302000" />
+      <workItem from="1551394322078" duration="2142000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18921000" />
+    <option name="totallyTimeSpent" value="19761000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -186,10 +184,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="7" width="2562" height="1434" extended-state="6" />
-    <editor active="true" />
+    <frame x="557" y="128" width="1544" height="1149" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16935484" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28688523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -201,7 +198,7 @@
       <window_info anchor="bottom" id="TODO" order="6" weight="0.24101306" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32924837" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.4352052" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.5269608" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.32924837" />
