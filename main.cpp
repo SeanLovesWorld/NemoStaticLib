@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
 //    cout<<"Graph Test"<<endl;
     string filename = "../TestingFiles/Y2k.txt";
 //   string filename = "test_input.txt";
-    Graph targetg(fiqlename, false);
+    Graph targetg(filename, false);
     // cout<<targetg.getSize()<<endl;
     //  cout<<targetg<<endl;
 
