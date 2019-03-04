@@ -107,7 +107,7 @@ int main(int argc, char **argv) {
 //    cout<<"Graph Test"<<endl;
     string filename = "../TestingFiles/Y2k.txt";
 //   string filename = "test_input.txt";
-    Graph targetg(filename, false);
+    Graph targetg(fiqlename, false);
     // cout<<targetg.getSize()<<endl;
     //  cout<<targetg<<endl;
 
@@ -148,7 +148,7 @@ int main(int argc, char **argv) {
 
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
 
-    cout << "Time = " << duration * 1000 << "ms" << endl;
+    cout << "Time = " << duration << "s" << endl;
 
 
     return 0;
