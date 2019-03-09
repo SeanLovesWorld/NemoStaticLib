@@ -132,15 +132,22 @@ int main(int argc, char **argv) {
     for (int i = 0; i < motifSize - 2; i++) {
         probs.push_back(1.0);
     }
-    probs.push_back(0.5);
-    probs.push_back(0.5);
+    probs.push_back(1.0);
+    probs.push_back(0.1);
 
     cout << "Analyzing random graphs..." << endl;
+
+    cout << "critical area start";
 
     unordered_map<graph64, vector<double>> randLabelRelFreqsMap = RandomGraphAnalysis::analyze(targetg, randomCount,
                                                                                                motifSize, probs);
 
+
+
     cout << "Comparing target graph to random graphs" << endl;
+
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Time = " << duration << "s" << endl;
 
     StatisticalAnalysis stat(targetLabelRelFreqMap, randLabelRelFreqsMap, randomCount);
 
