@@ -111,7 +111,7 @@ int main(int argc, char **argv) {
     // cout<<targetg.getSize()<<endl;
     //  cout<<targetg<<endl;
 
-    std::cout<<"test"<<std::endl;
+    std::cout << "test" << std::endl;
 
     cout << "Analyzing target graph..." << endl;
     //SubgraphProfile subc(targetg.getSize());
@@ -125,9 +125,6 @@ int main(int argc, char **argv) {
 
     printmap(targetLabelRelFreqMap);
 
-    std::cout<<"test"<<std::endl;
-
-
     vector<double> probs;
     for (int i = 0; i < motifSize - 2; i++) {
         probs.push_back(1.0);
@@ -138,10 +135,11 @@ int main(int argc, char **argv) {
     cout << "Analyzing random graphs..." << endl;
 
     cout << "critical area start";
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Time = " << duration << "s" << endl;
 
     unordered_map<graph64, vector<double>> randLabelRelFreqsMap = RandomGraphAnalysis::analyze(targetg, randomCount,
                                                                                                motifSize, probs);
-
 
 
     cout << "Comparing target graph to random graphs" << endl;
@@ -154,7 +152,6 @@ int main(int argc, char **argv) {
     cout << stat << endl;
 
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-
     cout << "Time = " << duration << "s" << endl;
 
 
