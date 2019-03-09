@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
     tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
     cout << "Enueration time: " << tally << "s" << endl;
-    cout << "Time from the beginning: " << duration << "s" <<endl;
+    cout << "Time from the beginning: " << duration << "s" <<endl<<endl<<endl;
     tallyBegin = std::clock();
 
     // measuring probing time in order to compare with java
@@ -143,7 +143,7 @@ int main(int argc, char **argv) {
 
     tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Enueration time: " << tally << "s" << endl;
+    cout << "Probing time: " << tally << "s" << endl;
     cout << "Time from the beginning: " << duration << "s" <<endl<<endl<<endl;
     tallyBegin = std::clock();
 
