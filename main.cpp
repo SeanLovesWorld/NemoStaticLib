@@ -100,9 +100,10 @@ void printmap(const unordered_map<map_key, map_val> &_map) {
 
 int main(int argc, char **argv) {
     std::clock_t begin = std::clock();
+    std::clock_t tallyBegin = begin;
 
     double duration = 0.0;
-
+    double tally = 0.0;
 
 //    cout<<"Graph Test"<<endl;
     string filename = "../TestingFiles/Y2k.txt";
@@ -111,7 +112,13 @@ int main(int argc, char **argv) {
     // cout<<targetg.getSize()<<endl;
     //  cout<<targetg<<endl;
 
-    std::cout << "test" << std::endl;
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "File Input time: " << tally << "s" << endl;
+    cout << "Time from the beginning" << duration << "s" <<endl<<endl<<endl;
+
+    // Tally start for the enumeration
+    tallyBegin = std::clock();
 
     cout << "Analyzing target graph..." << endl;
     //SubgraphProfile subc(targetg.getSize());
@@ -120,17 +127,30 @@ int main(int argc, char **argv) {
     int randomCount = 1000;
     ESU::enumerate(targetg, subc, motifSize);
 
-    unordered_map<graph64, double> targetLabelRelFreqMap =
-            subc.getRelativeFrequencies();
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Enueration time: " << tally << "s" << endl;
+    cout << "Time from the beginning: " << duration << "s" <<endl;
+    tallyBegin = std::clock();
 
-    printmap(targetLabelRelFreqMap);
-
+    // measuring probing time in order to compare with java
     vector<double> probs;
     for (int i = 0; i < motifSize - 2; i++) {
         probs.push_back(1.0);
     }
     probs.push_back(1.0);
     probs.push_back(0.1);
+
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Enueration time: " << tally << "s" << endl;
+    cout << "Time from the beginning: " << duration << "s" <<endl<<endl<<endl;
+    tallyBegin = std::clock();
+
+
+    unordered_map<graph64, double> targetLabelRelFreqMap =
+            subc.getRelativeFrequencies();
+    printmap(targetLabelRelFreqMap);
 
     cout << "Analyzing random graphs..." << endl;
 
