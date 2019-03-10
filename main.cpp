@@ -159,7 +159,7 @@ int main(int argc, char **argv) {
 
     cout << "---------------------------------------------------------" << endl << endl << endl;
 
-    cout << "targetg: " << targetg << endl << endl;
+//    cout << "targetg: " << endl << targetg << endl << endl;
     cout << "randomCount: " << randomCount << endl << endl;
     cout << "motifSize: " << motifSize << endl << endl;
     cout << "probs: ";
@@ -168,11 +168,9 @@ int main(int argc, char **argv) {
 
     cout << endl << endl;
 
-//    return 0;
 
-
-    unordered_map<graph64, vector<double>> randLabelRelFreqsMap = RandomGraphAnalysis::analyze(targetg, randomCount,
-                                                                                               motifSize, probs);
+    unordered_map<graph64, vector<double>> randLabelRelFreqsMap =
+            RandomGraphAnalysis::analyze(targetg, randomCount, motifSize, probs);
 
     cout << endl << endl << endl;
     cout << "---------------------------------------------------------" << endl << endl << endl;
