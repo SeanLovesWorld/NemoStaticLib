@@ -53,7 +53,7 @@ public:
 	 * @param graph           the graph on which to execute RAND-ESU
 	 * @param subgraphSize    the size of the target Subgraphs
 	 */
-    static void enumerate(Graph &, SubgraphEnumerationResult &, int, const vector<double>);
+    static void enumerate(Graph &, SubgraphEnumerationResult &, const int &, const vector<double> &);
 
     /**
 	 * Enumerates all subgraphSize Subgraphs for the specified vertice's branch
@@ -67,7 +67,7 @@ public:
 	 * @param vertex
          * @param nuatylink
 	 */
-    static void enumerate(Graph &, SubgraphEnumerationResult &, int, const vector<double>, vertex, NautyLink &);
+    static void enumerate(Graph &, SubgraphEnumerationResult &, const int &, const vector<double> &, const vertex &, NautyLink &);
 
 
 private:

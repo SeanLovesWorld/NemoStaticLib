@@ -18,7 +18,14 @@ NautyLink::NautyLink(int subgraphsize, unordered_map<edge, edgetype> edgeset) : 
 
 }
 
-NautyLink::NautyLink(int subgraphsize, unordered_map<edge, edgetype> edgeset, bool dir) {
+/**
+ * change copy to refernce
+ *
+ * @param subgraphsize
+ * @param edgeset
+ * @param dir
+ */
+NautyLink::NautyLink(const int & subgraphsize, const unordered_map<edge, edgetype> & edgeset, const bool & dir) {
     G_N = subgraphsize;
     directed = dir;
     nautyinit();

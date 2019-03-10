@@ -55,7 +55,7 @@ class NautyLink {
 public:
     NautyLink(int, unordered_map<edge, edgetype>);
 
-    NautyLink(int, unordered_map<edge, edgetype>, bool);
+    NautyLink(const int &, const unordered_map<edge, edgetype> &, const bool &);
 
     virtual ~NautyLink();
 

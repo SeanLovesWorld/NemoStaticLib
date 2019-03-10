@@ -21,6 +21,9 @@
 
 #include "RandomGraphAnalysis.h"
 
+//should be removed after testing
+#include <ctime>
+
 RandomGraphAnalysis::RandomGraphAnalysis() {
 }
 
@@ -45,29 +48,52 @@ RandomGraphAnalysis::analyze(Graph &targetGraph, int randomGraphCount, int subgr
     // TODO consider changing this, as it creates the precondition of 
     // executing the target graph analysis first
     unordered_map<graph64, vector<double>> labelRelFreqsMap;
+
+    std::clock_t begin = 0;
+    double duration1 = 0;
+    double duration2 = 0;
+    double duration3 = 0;
+    double duration4 = 0;
+    double duration5 = 0;
+    double duration6 = 0;
+
     for (int i = 0; i < randomGraphCount; i++) {
         //display status for every 100th graph
-        if (i % 100 == 99) cout << "Analyzing random graph " << i + 1 << "..." << endl;
+        if (i % 100 == 99) {
+            cout << "Analyzing random graph " << i + 1 << "..." << endl;
+        }
+
+        begin = std::clock();
+
         //generate random graphs
         Graph randomGraph = RandomGraphGenerator::generate(targetGraph);
 
+        duration1 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+
+        begin = std::clock();
         // enumerate random graphs
         SubgraphCount subgraphCount;
+        duration2 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+
+        begin = std::clock();
         RandESU::enumerate(randomGraph, subgraphCount, subgraphSize, probs);
+        duration3 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+        begin = std::clock();
         unordered_map<graph64, double> curLabelRelFreqMap = subgraphCount.getRelativeFrequencies();
+        duration4 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
 
         // populate labelRelReqsMap with result
 
-
+        begin = std::clock();
         for (const auto &curLabelRelFreqPair : curLabelRelFreqMap) {
-
             graph64 curLabel = curLabelRelFreqPair.first;
             double curFreq = curLabelRelFreqPair.second;
             labelRelFreqsMap[curLabel].push_back(curFreq);
-
         }
+        duration5 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
     }
 
+    begin = std::clock();
     // fill in with zeros any List that is less than subgraph count to
     // ensure non-detection is accounted for.
     for (auto &p : labelRelFreqsMap) {
@@ -75,6 +101,15 @@ RandomGraphAnalysis::analyze(Graph &targetGraph, int randomGraphCount, int subgr
             p.second.push_back(0.0);
         }
     }
+
+    duration6 += (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+
+    std::cout << "duration1: " << duration1 << endl;
+    std::cout << "duration2: " << duration2 << endl;
+    std::cout << "duration3: " << duration3 << endl;
+    std::cout << "duration4: " << duration4 << endl;
+    std::cout << "duration5: " << duration5 << endl;
+    std::cout << "duration6: " << duration6 << endl;
 
     return labelRelFreqsMap;
 

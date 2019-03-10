@@ -13,6 +13,9 @@
 
 #include "RandESU.h"
 
+#include <chrono>
+#include <iostream>
+
 
 
 /** Determines whether or not to extend based on a given probability, given
@@ -83,14 +86,28 @@ bool RandESU::isExclusive(Graph &graph, vertex node, Subgraph &subgraph) {
  * @param subgraphSize    the size of the target Subgraphs
  */
 
-void
-RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphsize, const vector<double> probs) {
+/**
+ * For the optimal performance, I decided to invoke the refernce with the const
+ *
+ * Nano second analysis is required
+ *
+ * @param graph
+ * @param subgraphs
+ * @param subgraphsize
+ * @param probs
+ */
+void RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, const int &subgraphsize,
+                        const vector<double> &probs) {
+    auto begin = std::chrono::high_resolution_clock::now();
+
+
     // maintain list of nodes selected so far
     std::vector<vertex> selectedVertices;
     if (probs[0] == 1.0) // select all nodes
         for (int i = 0; i < graph.getSize(); i++)
             selectedVertices.push_back(i);
     else {
+        cout << "!!!!!!!!!!!!!!!!!!" << endl;
         //determine how many nodes should be sampled initially
         int numVerticesToSelect = (int) round(probs[0] * graph.getSize());
         for (int nVSelected = 0; nVSelected < numVerticesToSelect; ++nVSelected) {
@@ -103,11 +120,37 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgr
             selectedVertices.push_back(nodeSelected);
         }
     }
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    auto duration1 = end - begin;
+
+    begin = std::chrono::high_resolution_clock::now();
     NautyLink nautylink(subgraphsize, graph.getEdges(), graph.isDirected());
+    end = std::chrono::high_resolution_clock::now();
+
+    auto duration2 = end - begin;
+
+    begin = std::chrono::high_resolution_clock::now();
 
     for (vertex v : selectedVertices) {
         enumerate(graph, subgraphs, subgraphsize, probs, v, nautylink);
     }
+
+    end = std::chrono::high_resolution_clock::now();
+    auto duration3 = end - begin;
+
+    cout << '\t' << "***** RANDESU ***** (enumerate 1) " << endl;
+    cout << '\t' << "Graph Size: \t" << graph.getSize() << endl;
+    cout << '\t' << "First prob: \t" << probs[0] << endl << endl;
+    cout << '\t' << "duration1: \t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration1).count()
+         << " ns" << endl;
+    cout << '\t' << "duration2: \t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration2).count()
+         << " ns" << endl;
+    cout << '\t' << "duration3: \t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration3).count()
+         << " ns" << endl;
+
+    exit(1);
 
 }
 
@@ -116,6 +159,9 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgr
  * of an ESU execution tree using the RAND-ESU algorithm. Allows for more
  * control over execution order compared to the enumerate method that does
  * not include a vertex parameter.
+ *
+ * For the performance improvement, I changed to refernce
+ *
  * @param graph the graph on which to execute RAND-ESU
  * @param subgraphs
  * @param subgraphSize
@@ -123,8 +169,8 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgr
  * @param vertex
  */
 void
-RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphsize, const vector<double> probs,
-                   vertex vertexV, NautyLink &nautylink) {
+RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, const int & subgraphsize, const vector<double> & probs,
+                   const vertex & vertexV, NautyLink &nautylink) {
     // create a subgraph with given subgraphsize
 
 
