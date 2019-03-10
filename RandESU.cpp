@@ -180,23 +180,24 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, const int
     // create a subgraph with given subgraphsize
     Subgraph subgraph(subgraphsize);
     auto end = std::chrono::high_resolution_clock::now();
-    auto duration1 = end = begin;
+    auto duration1 = end - begin;
 
     begin = std::chrono::high_resolution_clock::now();
     // create an extends
     unordered_set<vertex> adjacencyList = graph.getAdjacencyList(vertexV);
     end = std::chrono::high_resolution_clock::now();
-    auto duration2 = end = begin;
+    auto duration2 = end - begin;
     begin = std::chrono::high_resolution_clock::now();
     vector<vertex> extends;
     end = std::chrono::high_resolution_clock::now();
-    auto duration3 = end = begin;
+    auto duration3 = end - begin;
 
     begin = std::chrono::high_resolution_clock::now();
     unordered_set<vertex>::const_iterator iter = adjacencyList.begin();
     end = std::chrono::high_resolution_clock::now();
-    auto duration4 = end = begin;
+    auto duration4 = end - begin;
 
+    // Java and C++ similar (too)
     begin = std::chrono::high_resolution_clock::now();
     while (iter != adjacencyList.end()) {
         vertex next = *iter;
@@ -207,12 +208,12 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, const int
         iter++;
     }
     end = std::chrono::high_resolution_clock::now();
-    auto duration5 = end = begin;
+    auto duration5 = end - begin;
 
     begin = std::chrono::high_resolution_clock::now();
     subgraph.add(vertexV); // add to the subgraph, the vertex and its corresponding adjacencylist
     end = std::chrono::high_resolution_clock::now();
-    auto duration6 = end = begin;
+    auto duration6 = end - begin;
 
 
     begin = std::chrono::high_resolution_clock::now();
@@ -221,25 +222,25 @@ RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, const int
         extend(graph, subgraph, extends, probs, subgraphs, nautylink);
     }
     end = std::chrono::high_resolution_clock::now();
-    auto duration7 = end = begin;
+    auto duration7 = end - begin;
 
     cout << "\t\t" << "***** RANDESU ***** (enumerate 2) " << endl;
-//    cout << "\t\t" << "duration1: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration1).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration2: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration2).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration3: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration3).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration4: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration4).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration5: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration5).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration6: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration6).count()
-//         << " ns" << endl;
-//    cout << "\t\t" << "duration7: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration7).count()
-//         << " ns" << endl;
+    cout << "\t\t" << "duration1: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration1).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration2: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration2).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration3: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration3).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration4: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration4).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration5: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration5).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration6: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration6).count()
+         << " ns" << endl;
+    cout << "\t\t" << "duration7: \t\t\t" << std::chrono::duration_cast<std::chrono::nanoseconds>(duration7).count()
+         << " ns" << endl;
 
-    exit(1);
+//    exit(1);
 
 
 }
