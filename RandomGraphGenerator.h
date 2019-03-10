@@ -26,12 +26,15 @@
 class RandomGraphGenerator {
 public:
     RandomGraphGenerator();
+
     virtual ~RandomGraphGenerator();
-    static Graph generate(Graph&);
-    static Graph generate(Graph&, vector<int> );
+
+    static Graph generate(Graph &);
+
+    static Graph generate(Graph &, vector<int>);
 
 private:
-    static vector<int> getDegreeSequenceVector(Graph&);          
+    static vector<int> getDegreeSequenceVector(Graph &);
 
 };
 

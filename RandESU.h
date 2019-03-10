@@ -18,6 +18,7 @@
 
 #ifndef RANDESU_H
 #define RANDESU_H
+
 #include "Graph.h"
 #include "Subgraph.h"
 #include "SubgraphEnumerationResult.h"
@@ -26,11 +27,12 @@
 //#include <set>
 //using std::set;
 
-#include <math.h> 
+#include <math.h>
 #include <algorithm>
 #include "NautyLink.h"
 
 #include <unordered_set>
+
 using std::unordered_set;
 
 
@@ -51,7 +53,8 @@ public:
 	 * @param graph           the graph on which to execute RAND-ESU
 	 * @param subgraphSize    the size of the target Subgraphs
 	 */
-    static void enumerate(Graph&, SubgraphEnumerationResult&, int, const vector<double>);
+    static void enumerate(Graph &, SubgraphEnumerationResult &, int, const vector<double>);
+
     /**
 	 * Enumerates all subgraphSize Subgraphs for the specified vertice's branch
 	 * of an ESU execution tree using the RAND-ESU algorithm. Allows for more
@@ -64,29 +67,29 @@ public:
 	 * @param vertex
          * @param nuatylink
 	 */
-    static void enumerate(Graph&, SubgraphEnumerationResult&, int, const vector<double>, vertex, NautyLink&);
-    
-    
-        
+    static void enumerate(Graph &, SubgraphEnumerationResult &, int, const vector<double>, vertex, NautyLink &);
+
+
 private:
-    
+
     /** determines whether or not to extend based on a given probability, given
 	 as an integer.
 	 precondition: 0.0 <= prob <= 1.0
     **/
     static bool shouldExtend(double);
-    
+
     /** returns true if the node index is exclusive to the given subgraph
 	 (that is, is not already in the subgraph, and is not adjacent to any of
 	  the nodes in the subgraph)
      **/
-    
-    static bool isExclusive(Graph&, vertex, Subgraph&);
-    
-       /** extend the subgraphs recursively    
-     * */
-    static void extend(Graph&, Subgraph&, vector<vertex>, const vector<double>, SubgraphEnumerationResult&, NautyLink&);
- 
+
+    static bool isExclusive(Graph &, vertex, Subgraph &);
+
+    /** extend the subgraphs recursively
+  * */
+    static void
+    extend(Graph &, Subgraph &, vector<vertex>, const vector<double>, SubgraphEnumerationResult &, NautyLink &);
+
 
 };
 

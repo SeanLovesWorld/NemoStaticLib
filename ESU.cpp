@@ -13,22 +13,23 @@
 
 #include "ESU.h"
 
-void ESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int subgraphSize) {
-    
-    
+void ESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphSize) {
+
+
     NautyLink nautylink(subgraphSize, graph.getEdges(), graph.isDirected());
     for (int i = 0; i < graph.getSize(); i++) {
         enumerate(graph, subgraphs, subgraphSize, i, nautylink);
     }
 }
 
-void ESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int subgraphSize, vertex vertexV, NautyLink& nautylink) {
-  
+void ESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphSize, vertex vertexV,
+                    NautyLink &nautylink) {
+
     vector<double> probs;
     for (int i = 0; i < subgraphSize; ++i) {
         probs.push_back(1.0);
     }
-    
+
     RandESU::enumerate(graph, subgraphs, subgraphSize, probs, vertexV, nautylink);
 }
 

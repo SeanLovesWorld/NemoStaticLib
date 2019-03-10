@@ -16,42 +16,52 @@
 
 #include "RandomGraphAnalysis.h"
 #include <cmath>
+
 using std::pow;
 using std::sqrt;
 
 #include <string>
+
 using std::string;
+
 #include <sstream>
+
 using std::stringstream;
 
 #include <iomanip>
+
 using std::setprecision;
 
 class StatisticalAnalysis {
-    
-     friend ostream& operator<< (ostream&, StatisticalAnalysis&);
-     
+
+    friend ostream &operator<<(ostream &, StatisticalAnalysis &);
+
 public:
     StatisticalAnalysis(); // not allowed
-    StatisticalAnalysis(unordered_map<graph64, double>&, unordered_map<graph64, vector<double>>& ,int);
+    StatisticalAnalysis(unordered_map<graph64, double> &, unordered_map<graph64, vector<double>> &, int);
+
     virtual ~StatisticalAnalysis();
-    
+
     unordered_map<graph64, double> getZScores();
+
     double getZScore(graph64);
+
     double getZScore(graph64, double, double);
+
     unordered_map<graph64, double> getPValues();
-    double getPValue(graph64);    
-    
+
+    double getPValue(graph64);
+
     int randGraphCount;
-    
+
 private:
     unordered_map<graph64, double> targetGraphRelFreqs;
     unordered_map<graph64, vector<double>> randomGraphRelFreqs;
+
     double calcRandStdDev(graph64, double);
+
     double calcRandMean(graph64);
-    
-    
-    
+
 
 };
 

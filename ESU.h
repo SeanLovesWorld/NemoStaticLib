@@ -13,13 +13,11 @@
 
 #ifndef ESU_H
 #define ESU_H
+
 #include "RandESU.h"
+
 using std::cout;
 using std::ostream;
-
-
-
-
 
 
 /**
@@ -28,34 +26,33 @@ using std::ostream;
  */
 class ESU {
 public:
-   /**
-	 * Enumerates Subgraphs using the ESU algorithm. Requires user to specify
-	 * return type(s) and provide the accompanying data structures.
-	 *
-	 * @param graph the graph on which to execute ESU
-	 * @param subgraphs the SubgraphEnumerationResult into which to enumerated
-	 *                  Subgraphs will be stored.
-	 * @param subgraphSize the size of the target Subgraphs
-	 */
-    static void enumerate(Graph&, SubgraphEnumerationResult&, int);
-   /**
-	 * Enumerates Subgraphs for one branch of the ESU tree starting at the
-	 * given node. Allows for more control over the order the order of 
-	 * execution, but does not perform a full enumeration.
-	 *
-	 * @param graph the graph on which to execute ESU
-	 * @param subgraphs the data structure to which results are written
-	 * @param subgraphSize the target subgraph size to enumerate
-	 * @param vertex the graph vertex at which to execute
-         * @param nautylink after initialize from the previous
-	 */
-    static void enumerate(Graph&, SubgraphEnumerationResult&, int, vertex, NautyLink&);
-    
-            
+    /**
+      * Enumerates Subgraphs using the ESU algorithm. Requires user to specify
+      * return type(s) and provide the accompanying data structures.
+      *
+      * @param graph the graph on which to execute ESU
+      * @param subgraphs the SubgraphEnumerationResult into which to enumerated
+      *                  Subgraphs will be stored.
+      * @param subgraphSize the size of the target Subgraphs
+      */
+    static void enumerate(Graph &, SubgraphEnumerationResult &, int);
+
+    /**
+      * Enumerates Subgraphs for one branch of the ESU tree starting at the
+      * given node. Allows for more control over the order the order of
+      * execution, but does not perform a full enumeration.
+      *
+      * @param graph the graph on which to execute ESU
+      * @param subgraphs the data structure to which results are written
+      * @param subgraphSize the target subgraph size to enumerate
+      * @param vertex the graph vertex at which to execute
+          * @param nautylink after initialize from the previous
+      */
+    static void enumerate(Graph &, SubgraphEnumerationResult &, int, vertex, NautyLink &);
+
+
 private:
-    
-    
- 
+
 
 };
 

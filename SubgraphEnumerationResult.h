@@ -16,6 +16,7 @@
 /*This class is an interface class*/
 #include "Subgraph.h"
 #include "NautyLink.h"
+
 using std::cout;
 using std::ostream;
 
@@ -23,30 +24,30 @@ using std::ostream;
 //using google::sparse_hash_map; 
 
 #include <unordered_map>
-using std::unordered_map; 
 
-
+using std::unordered_map;
 
 
 class SubgraphEnumerationResult {
 public:
-    SubgraphEnumerationResult(){};
-    virtual ~SubgraphEnumerationResult(){};
+    SubgraphEnumerationResult() {};
+
+    virtual ~SubgraphEnumerationResult() {};
+
     /**
 	 * Adds a Subgraph to this SubgraphEnumerationResult
 	 * @param currentSubgraph a Subgraph to add to this
 	 * SubgraphEnumerationResult
 	 */
-    virtual void add(Subgraph&, NautyLink&)=0;
-    
+    virtual void add(Subgraph &, NautyLink &) = 0;
+
     /**
 	 * Calculates and returns a map of relative frequencies or concentrations
 	 * of labels in this subgraph.
 	 * @return The map of relative frequencies
 	 */
-    virtual unordered_map <graph64, double> getRelativeFrequencies()=0;
-    
-    
+    virtual unordered_map<graph64, double> getRelativeFrequencies() = 0;
+
 
 };
 

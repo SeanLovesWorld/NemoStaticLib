@@ -27,15 +27,18 @@
 #include "RandESU.h"
 #include <vector>
 #include <algorithm>
+
 using std::vector;
 
 class RandomGraphAnalysis {
 public:
     RandomGraphAnalysis();
+
     virtual ~RandomGraphAnalysis();
-    static unordered_map<graph64, vector<double>> analyze(Graph&, int, int, const vector<double>&);  
-        
-    
+
+    static unordered_map<graph64, vector<double>> analyze(Graph &, int, int, const vector<double> &);
+
+
 private:
 
 };

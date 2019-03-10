@@ -38,7 +38,8 @@ RandomGraphAnalysis::~RandomGraphAnalysis() {
  * random graph pool
  */
 
-unordered_map <graph64, vector<double>> RandomGraphAnalysis::analyze(Graph& targetGraph, int randomGraphCount, int subgraphSize, const vector<double>& probs) {
+unordered_map<graph64, vector<double>>
+RandomGraphAnalysis::analyze(Graph &targetGraph, int randomGraphCount, int subgraphSize, const vector<double> &probs) {
     // create the return map and fill it with the labels we found in the
     // target graph, as those are the only labels about which we care
     // TODO consider changing this, as it creates the precondition of 
@@ -58,7 +59,7 @@ unordered_map <graph64, vector<double>> RandomGraphAnalysis::analyze(Graph& targ
         // populate labelRelReqsMap with result
 
 
-        for (const auto& curLabelRelFreqPair : curLabelRelFreqMap) {
+        for (const auto &curLabelRelFreqPair : curLabelRelFreqMap) {
 
             graph64 curLabel = curLabelRelFreqPair.first;
             double curFreq = curLabelRelFreqPair.second;
@@ -69,7 +70,7 @@ unordered_map <graph64, vector<double>> RandomGraphAnalysis::analyze(Graph& targ
 
     // fill in with zeros any List that is less than subgraph count to
     // ensure non-detection is accounted for.
-    for (auto& p : labelRelFreqsMap) {
+    for (auto &p : labelRelFreqsMap) {
         while (p.second.size() < randomGraphCount) {
             p.second.push_back(0.0);
         }

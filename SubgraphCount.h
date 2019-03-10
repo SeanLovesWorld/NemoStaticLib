@@ -13,6 +13,7 @@
 
 #ifndef SUBGRAPHCOUNT_H
 #define SUBGRAPHCOUNT_H
+
 #include "SubgraphEnumerationResult.h"
 
 /*Test sparse hash map*/
@@ -27,29 +28,29 @@
  */
 
 
-class SubgraphCount: public SubgraphEnumerationResult {
-    friend ostream& operator<< (ostream&, const SubgraphCount&);
+class SubgraphCount : public SubgraphEnumerationResult {
+    friend ostream &operator<<(ostream &, const SubgraphCount &);
+
 public:
     /**
 	 * Construct an empty SubgraphCount. Create an sparse_hash_map (like a hash map)
 	 */
     SubgraphCount();
+
     virtual ~SubgraphCount();
+
     /* Implement the add function of subgraph enumeration result*/
-    void add(Subgraph&, NautyLink&); 
-     
-    unordered_map <graph64, double> getRelativeFrequencies();    
-     
-    unordered_map <graph64, uint64> getlabeFreqMap();  
-    
- 
-    
-    bool equals(SubgraphCount&); // not implemented yet
-    
+    void add(Subgraph &, NautyLink &);
+
+    unordered_map<graph64, double> getRelativeFrequencies();
+
+    unordered_map<graph64, uint64> getlabeFreqMap();
+
+
+    bool equals(SubgraphCount &); // not implemented yet
+
 private:
-    unordered_map<graph64, uint64> labelFreqMap; 
-    
-        
+    unordered_map<graph64, uint64> labelFreqMap;
 
 
 };

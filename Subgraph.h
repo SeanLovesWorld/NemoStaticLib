@@ -18,19 +18,20 @@
 #define SUBGRAPH_H
 
 
-
-
 #include <iostream>
+
 using std::ostream;
 using std::cout;
 using std::endl;
 
 #include <string>
 #include <sstream>
+
 using std::string;
 using std::stringstream;
 
 #include <vector>
+
 using std::vector;
 
 
@@ -38,18 +39,25 @@ using std::vector;
 
 
 class Subgraph {
-    friend ostream& operator<< (ostream&, const Subgraph&);
+    friend ostream &operator<<(ostream &, const Subgraph &);
+
 public:
     Subgraph(int); /// the order of this subgraphs
     virtual ~Subgraph();
+
     Subgraph copy();
+
     int getSize();
+
     int getOrder();
+
     int root(); //get the first vertex id added to this subgraph
     bool contains(vertex); //Check whether a vertex exists in this Subgraph
     void add(vertex);
+
     int get(int); //get the nth node of this subgraph
-    vector<vertex>& getNodes();
+    vector<vertex> &getNodes();
+
     bool isComplete();
 
 private:

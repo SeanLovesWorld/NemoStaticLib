@@ -16,19 +16,23 @@
 
 #include "SubgraphEnumerationResult.h"
 // The primary structure of a subgraph profile. Essentially a table to map 
-	// labels(String) and nodes(Integer) to the frequency of subgraphs 
-	// of type label that include the node.
+// labels(String) and nodes(Integer) to the frequency of subgraphs
+// of type label that include the node.
 
 /* This class will have two maps: subgraphprofile and subgraphcount map */
-class SubgraphProfile:public SubgraphEnumerationResult {
+class SubgraphProfile : public SubgraphEnumerationResult {
 public:
     // get the size of vertex as parameter
-    SubgraphProfile(uint64); 
+    SubgraphProfile(uint64);
+
     virtual ~SubgraphProfile();
-    void add(Subgraph&, NautyLink&); 
-      
-    unordered_map <graph64, double> getRelativeFrequencies();
+
+    void add(Subgraph &, NautyLink &);
+
+    unordered_map<graph64, double> getRelativeFrequencies();
+
     unordered_map<graph64, vector<uint64>> getlabelVertexFreqMapMap();
+
     unordered_map<graph64, uint64> getlabelFreqMap(int); //need subgraphsize to calculate frequency
     /**
 	 * Merge this SubgraphProfile with another SubgraphProfile
@@ -36,9 +40,12 @@ public:
 	 * SubgraphProfile
 	 */
     void merge();
+
 private:
     unordered_map<graph64, vector<uint64>> labelVertexFreqMapMap;
+
     uint64 getTotalSubgaphCount();
+
     uint64 graphsize;
 
 

@@ -53,7 +53,7 @@ bool RandESU::shouldExtend(const double prob) {
          the nodes in the subgraph)
  **/
 
-bool RandESU::isExclusive(Graph& graph, vertex node, Subgraph& subgraph) {
+bool RandESU::isExclusive(Graph &graph, vertex node, Subgraph &subgraph) {
 
     for (int i = 0; i < subgraph.getSize(); i++) {
         vertex subgraphNode = subgraph.get(i);
@@ -83,7 +83,8 @@ bool RandESU::isExclusive(Graph& graph, vertex node, Subgraph& subgraph) {
  * @param subgraphSize    the size of the target Subgraphs
  */
 
-void RandESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int subgraphsize, const vector<double> probs) {
+void
+RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphsize, const vector<double> probs) {
     // maintain list of nodes selected so far
     std::vector<vertex> selectedVertices;
     if (probs[0] == 1.0) // select all nodes
@@ -121,7 +122,9 @@ void RandESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int 
  * @param probs
  * @param vertex
  */
-void RandESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int subgraphsize, const vector<double> probs, vertex vertexV, NautyLink& nautylink) {
+void
+RandESU::enumerate(Graph &graph, SubgraphEnumerationResult &subgraphs, int subgraphsize, const vector<double> probs,
+                   vertex vertexV, NautyLink &nautylink) {
     // create a subgraph with given subgraphsize
 
 
@@ -154,58 +157,58 @@ void RandESU::enumerate(Graph& graph, SubgraphEnumerationResult& subgraphs, int 
     }
 
 
-
 }
 
-void RandESU::extend(Graph& graph, Subgraph& subgraph, vector<vertex> extension, const vector<double> probs, SubgraphEnumerationResult& subgraphs, NautyLink& nautylink) {
+void RandESU::extend(Graph &graph, Subgraph &subgraph, vector<vertex> extension, const vector<double> probs,
+                     SubgraphEnumerationResult &subgraphs, NautyLink &nautylink) {
 
     vertex v = subgraph.root();
     vector<vertex>::const_iterator wIter = extension.begin();
-    
+
 
     // optimize by not creating next extension if subgraph is
     // 1 node away from completion
     if (subgraph.getSize() == subgraph.getOrder() - 1) {
-          while (wIter != extension.end()) {
+        while (wIter != extension.end()) {
 
             //cout << "1. subgraph = " << subgraph << endl;
-           // cout << "1. Extension=[";
-           // for (vertex v : extension) cout << v << " ";
-           // cout << "]" << endl;
-            
+            // cout << "1. Extension=[";
+            // for (vertex v : extension) cout << v << " ";
+            // cout << "]" << endl;
+
             vertex w = *wIter++;
-             
-            
+
+
             // cout << "1. w = " << w << endl;             
-             
- 
+
+
             // check the last value in prob list
             if (shouldExtend(probs.at(probs.size() - 1))) {
- 
+
                 Subgraph subgraphUnion = subgraph.copy();
                 subgraphUnion.add(w);
                 subgraphs.add(subgraphUnion, nautylink);
             }
-            
+
         }
 
     }
 
-     // otherwise create the extention
+    // otherwise create the extention
     while (wIter != extension.end()) {
- //        cout << "2. subgraph=" << subgraph << endl;
- //       cout << "2. Extension=[";
+        //        cout << "2. subgraph=" << subgraph << endl;
+        //       cout << "2. Extension=[";
 //        for (vertex v : extension) cout << v << " ";
- //       cout << "]" << endl;
-         vertex w = *wIter;
-        
-   //       cout << "2. w = " << w << endl;
-        extension.erase(wIter);       
-        
+        //       cout << "]" << endl;
+        vertex w = *wIter;
 
-   //   cout << "3. After erase Extension=[";
-    //    for (vertex v : extension) cout << v << " ";
-    //    cout << "]" << endl;
+        //       cout << "2. w = " << w << endl;
+        extension.erase(wIter);
+
+
+        //   cout << "3. After erase Extension=[";
+        //    for (vertex v : extension) cout << v << " ";
+        //    cout << "]" << endl;
 
         // next extension contains at least the current extension
         vector<vertex> nextExtension = extension;
@@ -223,22 +226,22 @@ void RandESU::extend(Graph& graph, Subgraph& subgraph, vector<vertex> extension,
                 if (isExclusive(graph, u, subgraph)) {
                     nextExtension.push_back(u);
                 }
-              uIter++;
+            uIter++;
         }
 
-   //     cout << "2. nextExtension=[";
-  //      for (vertex v : nextExtension) cout << v << " ";
-  //      cout << "]" << endl;
+        //     cout << "2. nextExtension=[";
+        //      for (vertex v : nextExtension) cout << v << " ";
+        //      cout << "]" << endl;
 
 
         // construct a union of w and the existing subgraph
 
         Subgraph subgraphUnion = subgraph.copy();
         subgraphUnion.add(w);
-          // randomly choose whether or not to extend to the next level
+        // randomly choose whether or not to extend to the next level
         // based on the probability vector provided.
 
-      //  wIter++;
+        //  wIter++;
 
         if (shouldExtend(probs.at(subgraphUnion.getSize() - 1))) {
             extend(graph, subgraphUnion, nextExtension, probs, subgraphs, nautylink);
@@ -246,7 +249,7 @@ void RandESU::extend(Graph& graph, Subgraph& subgraph, vector<vertex> extension,
     }
     //  }
 
- //   cout << "Returning from source " << subgraph << endl;
+    //   cout << "Returning from source " << subgraph << endl;
 
 
 

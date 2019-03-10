@@ -16,28 +16,29 @@
 #include "Subgraph.h"
 
 
- /**
-	 * Construct a subgraph of a specified order (i.e. number of nodes)
-	 * @param order the order of this subgraphs
-	 */
+/**
+    * Construct a subgraph of a specified order (i.e. number of nodes)
+    * @param order the order of this subgraphs
+    */
 
 
-Subgraph::Subgraph(int order){
-    this->order = order; 
+Subgraph::Subgraph(int order) {
+    this->order = order;
 }
 
-Subgraph::~Subgraph(){
-     this->order = 0;
+Subgraph::~Subgraph() {
+    this->order = 0;
 }
+
 /**
 	 * Create a deep copy of this subgraph
 	 * @return a deep copy of this subgraph
 	 */
 
-Subgraph Subgraph::copy(){
+Subgraph Subgraph::copy() {
     Subgraph copy(order);
     copy.order = order;
-    for (int i=0; i<nodes.size();i++){
+    for (int i = 0; i < nodes.size(); i++) {
         copy.nodes.push_back(nodes.at(i));
     }
     return copy;
@@ -46,10 +47,10 @@ Subgraph Subgraph::copy(){
 /**
 	 * Get the current size of this Subgraph.
 	 * @return the size of this Subgraph.
-	 */ 
+	 */
 
 
-int Subgraph::getSize(){
+int Subgraph::getSize() {
     return nodes.size();
 }
 
@@ -59,30 +60,32 @@ int Subgraph::getSize(){
 	 */
 
 
-int Subgraph::getOrder(){
+int Subgraph::getOrder() {
     return order;
 }
+
 /**
 	 * Test whether this subgraph has been filled
 	 * @return true if subgraph is full; false otherwise
 	 */
 
-bool Subgraph::isComplete(){
+bool Subgraph::isComplete() {
     return (nodes.size() == order);
 }
+
 /**
  * Gets the id number of the first vertex added to this Subgraph
  * @return the id of the root
  */
 
 int Subgraph::root() {
-    if (nodes.size()<1) {
-       cout<< "It is currently empty"<<endl;
-        return -1;    
+    if (nodes.size() < 1) {
+        cout << "It is currently empty" << endl;
+        return -1;
     }
     return nodes.at(0);
 }
-    
+
 /**
  * Check whether a vertex exists in this Subgraph
  * @param vertex the target vertex
@@ -91,8 +94,8 @@ int Subgraph::root() {
  */
 
 
-bool Subgraph::contains(vertex v) {  
-        
+bool Subgraph::contains(vertex v) {
+
     for (int i = 0; i < nodes.size(); i++) {
         if (nodes.at(i) == v) {
             return true;
@@ -109,14 +112,15 @@ bool Subgraph::contains(vertex v) {
  */
 
 void Subgraph::add(vertex v) {
-    if(isComplete()){
-        cout<<"The subgraph is full:: Cannot add more"<<endl;
-       return;
+    if (isComplete()) {
+        cout << "The subgraph is full:: Cannot add more" << endl;
+        return;
     }
-   
+
     nodes.push_back(v);
-    
+
 }
+
 /**
  * Get the nth node added to this Subgraph
  * @return the nth node added to this Subgraph
@@ -124,19 +128,20 @@ void Subgraph::add(vertex v) {
 
 
 int Subgraph::get(int n) {
-    if((n>nodes.size()-1)||(nodes.size()<1)){
-        cout<<n<<"th index is not available"<<endl;
+    if ((n > nodes.size() - 1) || (nodes.size() < 1)) {
+        cout << n << "th index is not available" << endl;
         return -1;
     }
     return nodes.at(n);
 }
+
 /**
  * Get all the nodes in this Subgraph
  * @return this Subgraph's nodes
  */
 
 
-vector<vertex>& Subgraph::getNodes() {
+vector<vertex> &Subgraph::getNodes() {
     return nodes;
 }
 
@@ -148,21 +153,21 @@ vector<vertex>& Subgraph::getNodes() {
 
 
 
- ostream& operator<<(ostream& out, const Subgraph& sgraph) {
-     string s = "[";
-     if (sgraph.nodes.size()<1) {
-         out<<"empty";
-         return out;
-     }
-         
-     for (int i=0; i<sgraph.nodes.size()-1; i++){
-         stringstream ss;
-         ss<<sgraph.nodes.at(i);
-         s = s+ss.str()+",";
-     }
-     stringstream last;
-     last<<sgraph.nodes.at(sgraph.nodes.size()-1);
-     s = s+last.str()+"]";
+ostream &operator<<(ostream &out, const Subgraph &sgraph) {
+    string s = "[";
+    if (sgraph.nodes.size() < 1) {
+        out << "empty";
+        return out;
+    }
+
+    for (int i = 0; i < sgraph.nodes.size() - 1; i++) {
+        stringstream ss;
+        ss << sgraph.nodes.at(i);
+        s = s + ss.str() + ",";
+    }
+    stringstream last;
+    last << sgraph.nodes.at(sgraph.nodes.size() - 1);
+    s = s + last.str() + "]";
 
     out << s;
 
