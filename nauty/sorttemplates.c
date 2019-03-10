@@ -6,7 +6,7 @@
  * should be #included after defining a few preprocessor variables.
  *   SORT_OF_SORT, SORT_NAME and SORT_TYPE1 are required, and
  *   SORT_TYPE2 is needed for SORT_OF_SORT > 1.
- * 
+ *
  *   SORT_OF_SORT = 1: Creates a procedure
  *         static void SORT_NAME(SORT_TYPE1 *x, int n)
  *     which permutes x[0..n-1] so that x[0] <= ... <= x[n-1].
@@ -18,7 +18,7 @@
  *         static void SORT_NAME(SORT_TYPE1 *x, SORT_TYPE2 *y, int n)
  *     which permutes x[0..n-1] so that y[x[0]] <= ... <= y[x[n-1]].
  *     The array y[] is not changed.
- * 
+ *
  *   SORT_NAME = the name of the procedure to be created
  *
  *   SORT_TYPE1 = type of the first or only array (no default)
@@ -29,7 +29,7 @@
  *       SORT_OF_SORT=2, but must be a numeric type for SORT_OF_SORT=3.
  *
  *   SORT_MINPARTITION = least number of elements for using quicksort
- *           partitioning, otherwise insertion sort is used (default "11") 
+ *           partitioning, otherwise insertion sort is used (default "11")
  *   SORT_MINMEDIAN9 = least number of elements for using the median of 3
  *           medians of 3 for partitioning (default "320")
  *   SORT_FUNCTYPE = type of sort function (default "static void")
@@ -37,18 +37,44 @@
  *   This file can be included any number of times provided the value
  *   of SORT_NAME is different each time.
  */
- 
+
+
+#ifndef SORT_TYPE1
+#define SORT_TYPE1 int
+#endif
+
+#ifndef SORT_TYPE2
+#define SORT_TYPE2 int
+#endif
+
+#ifndef SORT_MINPARTITION
+#define SORT_MINPARTITION 10
+#endif
+
+#ifndef SORT_MINMEDIAN9
+#define SORT_MINMEDIAN9 320
+#endif
+
+#ifndef SORT_FUNCTYPE
+#define SORT_FUNCTYPE static void
+#endif
+
+#define SORT_SWAP1(x,y) tmp1 = x; x = y; y = tmp1;
+#define SORT_SWAP2(x,y) tmp2 = x; x = y; y = tmp2;
+
+/*******************************************************************/
+
 #define SORT_MEDIAN_OF_3(a,b,c) \
  ((a) <= (b) ? ((b) <= (c) ? (b) : (c) <= (a) ? (a) : (c)) \
              : ((a) <= (c) ? (a) : (c) <= (b) ? (b) : (c)))
 
-#if !defined(SORT_OF_SORT) || !defined(SORT_NAME)
- #error Either SORT_OF_SORT or SORT_NAME is undefined
-#endif
-
-#if (SORT_OF_SORT < 1) || (SORT_OF_SORT > 3)
- #error Unknown value of SORT_OF_SORT
-#endif
+//#if !defined(SORT_OF_SORT) || !defined(SORT_NAME)
+// #error Either SORT_OF_SORT or SORT_NAME is undefined
+//#endif
+//
+//#if (SORT_OF_SORT < 1) || (SORT_OF_SORT > 3)
+// #error Unknown value of SORT_OF_SORT
+//#endif
 
 #ifndef SORT_TYPE1
  #error "SORT_TYPE1 must be defined before including sorttemplates.c"
@@ -145,7 +171,7 @@ SORT_NAME(SORT_TYPE1 *x, int n)
 	    ++xb;
 	    --xc;
         }
-    
+
         a = xa - x0;
         ba = xb - xa;
         if (ba > a) s = a; else s = ba;
@@ -274,7 +300,7 @@ SORT_NAME(SORT_TYPE1 *x, SORT_TYPE2 *y, int n)
 	    ++xb; ++yb;
 	    --xc; --yc;
         }
-    
+
         a = xa - x0;
         ba = xb - xa;
         if (ba > a) s = a; else s = ba;
@@ -397,7 +423,7 @@ SORT_NAME(SORT_TYPE1 *x, SORT_TYPE2 *y, int n)
 	    ++xb;
 	    --xc;
         }
-    
+
         a = xa - x0;
         ba = xb - xa;
         if (ba > a) s = a; else s = ba;
