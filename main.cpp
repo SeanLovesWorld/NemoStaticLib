@@ -109,19 +109,17 @@ int main(int argc, char **argv) {
     string filename = "../TestingFiles/Y2k.txt";
 //   string filename = "test_input.txt";
     Graph targetg(filename, false);
-    // cout<<targetg.getSize()<<endl;
-    //  cout<<targetg<<endl;
+//    cout << targetg.getSize() << endl;
+//    cout << targetg << endl;
 
     tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "File Input time: " << tally << "s" << endl;
-    cout << "Time from the beginning" << duration << "s" <<endl<<endl<<endl;
-
-    // Tally start for the enumeration
+    cout << "File Input time: \t\t\t\t\t\t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
     tallyBegin = std::clock();
 
     cout << "Analyzing target graph..." << endl;
-    //SubgraphProfile subc(targetg.getSize());
+//    SubgraphProfile subc(targetg.getSize());
     SubgraphCount subc;
     int motifSize = 3;
     int randomCount = 1000;
@@ -129,8 +127,8 @@ int main(int argc, char **argv) {
 
     tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Enueration time: " << tally << "s" << endl;
-    cout << "Time from the beginning: " << duration << "s" <<endl<<endl<<endl;
+    cout << "Enueration time: \t\t\t\t\t\t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
     tallyBegin = std::clock();
 
     // measuring probing time in order to compare with java
@@ -138,41 +136,64 @@ int main(int argc, char **argv) {
     for (int i = 0; i < motifSize - 2; i++) {
         probs.push_back(1.0);
     }
-    probs.push_back(1.0);
-    probs.push_back(0.1);
+    probs.push_back(0.5);
+    probs.push_back(0.5);
 
     tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Probing time: " << tally << "s" << endl;
-    cout << "Time from the beginning: " << duration << "s" <<endl<<endl<<endl;
+    cout << "Probing time: \t\t\t\t\t\t\t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
     tallyBegin = std::clock();
 
 
-    unordered_map<graph64, double> targetLabelRelFreqMap =
-            subc.getRelativeFrequencies();
-    printmap(targetLabelRelFreqMap);
+    unordered_map<graph64, double> targetLabelRelFreqMap = subc.getRelativeFrequencies();
+//    printmap(targetLabelRelFreqMap);
+
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Unordered map initalization time time: \t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
+    tallyBegin = std::clock();
 
     cout << "Analyzing random graphs..." << endl;
 
-    cout << "critical area start";
-    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Time = " << duration << "s" << endl;
+    cout << "---------------------------------------------------------" << endl << endl << endl;
+
+    cout << "targetg: " << targetg << endl << endl;
+    cout << "randomCount: " << randomCount << endl << endl;
+    cout << "motifSize: " << motifSize << endl << endl;
+    cout << "probs: ";
+    for (auto i = probs.begin(); i != probs.end(); ++i)
+        std::cout << *i << ' ';
+
+    cout << endl << endl;
+
+//    return 0;
+
 
     unordered_map<graph64, vector<double>> randLabelRelFreqsMap = RandomGraphAnalysis::analyze(targetg, randomCount,
                                                                                                motifSize, probs);
 
+    cout << endl << endl << endl;
+    cout << "---------------------------------------------------------" << endl << endl << endl;
+
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
+    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
+    cout << "Analyzing time: \t\t\t\t\t\t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
+    tallyBegin = std::clock();
+
 
     cout << "Comparing target graph to random graphs" << endl;
-
-    duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Time = " << duration << "s" << endl;
 
     StatisticalAnalysis stat(targetLabelRelFreqMap, randLabelRelFreqsMap, randomCount);
 
     cout << stat << endl;
 
+    tally = (std::clock() - tallyBegin) / (double) CLOCKS_PER_SEC;
     duration = (std::clock() - begin) / (double) CLOCKS_PER_SEC;
-    cout << "Time = " << duration << "s" << endl;
+    cout << "Result output time: \t\t\t\t\t\t" << tally << "s" << endl;
+    cout << "Time from the beginning: \t\t\t\t" << duration << "s" << endl << endl << endl;
 
 
     return 0;
